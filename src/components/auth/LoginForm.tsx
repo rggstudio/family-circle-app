@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { login } from '@/services/authService';
 
 interface LoginFormProps {
   onSuccess?: () => void;
@@ -20,37 +21,34 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
     setIsLoading(true);
 
     try {
-      // TODO: Implement actual authentication logic
-      console.log('Login with:', email, password);
+      // Call the login service
+      await login({ email, password });
       
-      // Simulate successful login
-      setTimeout(() => {
-        setIsLoading(false);
-        if (onSuccess) {
-          onSuccess();
-        } else {
-          router.push('/dashboard');
-        }
-      }, 1000);
-    } catch (err) {
+      // Handle successful login
+      if (onSuccess) {
+        onSuccess();
+      } else {
+        router.push('/dashboard');
+      }
+    } catch (err: any) {
       setIsLoading(false);
-      setError('Invalid email or password');
+      setError(err.message || 'Invalid email or password');
       console.error('Login error:', err);
     }
   };
 
   return (
-    <div className="p-6 bg-gray-800 rounded-lg shadow-md" style={{ marginLeft: '16px', marginRight: '16px', width: 'calc(100% - 32px)' }}>
-      <h2 className="text-2xl font-bold text-center mb-4 text-white">Login</h2>
+    <div className="p-5 bg-gray-800 rounded-lg shadow-md" style={{ marginLeft: '16px', marginRight: '16px', width: 'calc(100% - 32px)' }}>
+      <h2 className="text-xl font-bold text-center mb-3 text-white">Login</h2>
       
       {error && (
-        <div className="mb-3 p-2 bg-red-900/30 text-red-300 rounded-md text-sm">
+        <div className="mb-2 p-2 bg-red-900/30 text-red-300 rounded-md text-sm">
           {error}
         </div>
       )}
       
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        <div className="mb-2">
           <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
             Email
           </label>
@@ -64,7 +62,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
           />
         </div>
         
-        <div className="mb-4">
+        <div className="mb-6">
           <div className="flex justify-between items-center mb-1">
             <label htmlFor="password" className="block text-sm font-medium text-gray-300">
               Password
@@ -86,7 +84,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-1.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 mb-3"
+          className="w-full py-1.5 px-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 disabled:opacity-50 mb-2"
         >
           {isLoading ? 'Logging in...' : 'LOG IN'}
         </button>
@@ -94,7 +92,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         <div className="text-center">
           <p className="text-xs text-gray-400">
             Don't have an account?{' '}
-            <a href="/register" className="text-blue-400 hover:text-blue-300 font-medium">
+            <a href="/register" className="text-amber-500 hover:text-amber-400 font-medium">
               Sign up
             </a>
           </p>
