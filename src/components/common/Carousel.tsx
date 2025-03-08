@@ -36,7 +36,7 @@ const Carousel: React.FC<CarouselProps> = ({
   return (
     <div className="relative w-full max-w-md mx-auto mb-8">
       {/* Slides */}
-      <div className="relative overflow-hidden rounded-lg" style={{ height: '360px' }}>
+      <div className="relative overflow-hidden rounded-lg" style={{ height: '180px' }}>
         {slides.map((slide, index) => (
           <div 
             key={index}
@@ -45,15 +45,8 @@ const Carousel: React.FC<CarouselProps> = ({
             }`}
           >
             <div className="w-full h-full flex flex-col items-center justify-center text-center p-6">
-              <div className="mb-6 w-48 h-48">
-                <img 
-                  src={slide.image} 
-                  alt={slide.title} 
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <h2 className="text-2xl font-bold text-white mb-2">{slide.title}</h2>
-              <p className="text-gray-300 text-sm max-w-xs">{slide.description}</p>
+              <h2 className="text-2xl font-bold text-white mb-3">{slide.title}</h2>
+              <p className="text-gray-300 text-base max-w-xs">{slide.description}</p>
             </div>
           </div>
         ))}

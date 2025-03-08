@@ -65,9 +65,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         </div>
         
         <div className="mb-6">
-          <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-1">
-            Password
-          </label>
+          <div className="flex justify-between items-center mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-300">
+              Password
+            </label>
+            <a href="/forgot-password" className="text-sm text-blue-400 hover:text-blue-300">
+              Forgot password?
+            </a>
+          </div>
           <input
             id="password"
             type="password"
@@ -76,30 +81,25 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             className="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
-          <div className="mt-1 text-right">
-            <a href="/forgot-password" className="text-sm text-blue-400 hover:text-blue-300">
-              Forgot password?
-            </a>
-          </div>
         </div>
         
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50"
+          className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 mb-4"
         >
           {isLoading ? 'Logging in...' : 'LOG IN'}
         </button>
+        
+        <div className="text-center">
+          <p className="text-sm text-gray-400">
+            Don't have an account?{' '}
+            <a href="/register" className="text-blue-400 hover:text-blue-300 font-medium">
+              Sign up
+            </a>
+          </p>
+        </div>
       </form>
-      
-      <div className="mt-4 text-center">
-        <p className="text-sm text-gray-400">
-          Don't have an account?{' '}
-          <a href="/register" className="text-blue-400 hover:text-blue-300 font-medium">
-            Sign up
-          </a>
-        </p>
-      </div>
     </div>
   );
 };
