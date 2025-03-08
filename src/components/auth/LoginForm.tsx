@@ -40,17 +40,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-center mb-6 text-white">Login</h2>
+    <div className="p-6 bg-gray-800 rounded-lg shadow-md" style={{ marginLeft: '16px', marginRight: '16px', width: 'calc(100% - 32px)' }}>
+      <h2 className="text-2xl font-bold text-center mb-4 text-white">Login</h2>
       
       {error && (
-        <div className="mb-4 p-3 bg-red-900/30 text-red-300 rounded-md">
+        <div className="mb-3 p-2 bg-red-900/30 text-red-300 rounded-md text-sm">
           {error}
         </div>
       )}
       
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+        <div className="mb-3">
           <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
             Email
           </label>
@@ -59,17 +59,17 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-1.5 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
         
-        <div className="mb-6">
+        <div className="mb-4">
           <div className="flex justify-between items-center mb-1">
             <label htmlFor="password" className="block text-sm font-medium text-gray-300">
               Password
             </label>
-            <a href="/forgot-password" className="text-sm text-blue-400 hover:text-blue-300">
+            <a href="/forgot-password" className="text-xs text-blue-400 hover:text-blue-300">
               Forgot password?
             </a>
           </div>
@@ -78,7 +78,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-1.5 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
@@ -86,13 +86,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 mb-4"
+          className="w-full py-1.5 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 mb-3"
         >
           {isLoading ? 'Logging in...' : 'LOG IN'}
         </button>
         
         <div className="text-center">
-          <p className="text-sm text-gray-400">
+          <p className="text-xs text-gray-400">
             Don't have an account?{' '}
             <a href="/register" className="text-blue-400 hover:text-blue-300 font-medium">
               Sign up

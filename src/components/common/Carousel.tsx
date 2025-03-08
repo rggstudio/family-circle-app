@@ -34,7 +34,7 @@ const Carousel: React.FC<CarouselProps> = ({
   };
 
   return (
-    <div className="relative w-full max-w-md mx-auto mb-8">
+    <div className="relative w-full max-w-md mx-auto mb-4">
       {/* Slides */}
       <div className="relative overflow-hidden rounded-lg" style={{ height: '180px' }}>
         {slides.map((slide, index) => (
@@ -44,7 +44,7 @@ const Carousel: React.FC<CarouselProps> = ({
               index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
           >
-            <div className="w-full h-full flex flex-col items-center justify-center text-center p-6">
+            <div className="w-full h-full flex flex-col items-center justify-center text-center p-4">
               <h2 className="text-2xl font-bold text-white mb-3">{slide.title}</h2>
               <p className="text-gray-300 text-base max-w-xs">{slide.description}</p>
             </div>
@@ -53,7 +53,7 @@ const Carousel: React.FC<CarouselProps> = ({
       </div>
 
       {/* Indicators */}
-      <div className="flex justify-center mt-4 space-x-2">
+      <div className="flex justify-center space-x-2">
         {slides.map((_, index) => (
           <button
             key={index}
