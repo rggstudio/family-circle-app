@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Settings, Bell } from 'lucide-react';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 interface HeaderProps {
   familyName: string;
@@ -11,17 +12,20 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ familyName, userName }) => {
   return (
-    <header className="bg-amber-400 text-white p-4 rounded-b-3xl">
+    <header className="bg-amber-400 dark:bg-amber-600 text-white p-4 rounded-b-3xl">
       <div className="flex justify-between items-center mb-2">
-        <button className="p-2 rounded-full hover:bg-amber-500 transition-colors">
+        <button className="p-2 rounded-full hover:bg-amber-500 dark:hover:bg-amber-700 transition-colors">
           <Settings size={20} />
         </button>
         <div className="text-center">
           <p className="text-sm">Hello {userName}</p>
         </div>
-        <button className="p-2 rounded-full hover:bg-amber-500 transition-colors">
-          <Bell size={20} />
-        </button>
+        <div className="flex items-center">
+          <ThemeToggle />
+          <button className="p-2 rounded-full hover:bg-amber-500 dark:hover:bg-amber-700 transition-colors ml-2">
+            <Bell size={20} />
+          </button>
+        </div>
       </div>
       
       <div className="mt-4 mb-6">

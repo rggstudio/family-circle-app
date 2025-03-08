@@ -17,7 +17,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({
   value,
   description,
   icon,
-  color = 'bg-red-100 text-red-500',
+  color = 'bg-red-100 text-red-500 dark:bg-red-900/30 dark:text-red-300',
   onClick,
 }) => {
   return (

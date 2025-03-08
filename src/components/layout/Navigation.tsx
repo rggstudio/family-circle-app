@@ -13,14 +13,14 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-2 px-4">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-2 px-4">
       <div className="flex justify-around items-center">
-        <Link href="/dashboard" className={`flex flex-col items-center p-2 ${isActive('/dashboard') ? 'text-amber-500' : 'text-gray-500'}`}>
+        <Link href="/dashboard" className={`flex flex-col items-center p-2 ${isActive('/dashboard') ? 'text-amber-500' : 'text-gray-500 dark:text-gray-400'}`}>
           <Home size={24} />
           <span className="text-xs mt-1">Home</span>
         </Link>
         
-        <Link href="/calendar" className={`flex flex-col items-center p-2 ${isActive('/calendar') ? 'text-amber-500' : 'text-gray-500'}`}>
+        <Link href="/calendar" className={`flex flex-col items-center p-2 ${isActive('/calendar') ? 'text-amber-500' : 'text-gray-500 dark:text-gray-400'}`}>
           <Calendar size={24} />
           <span className="text-xs mt-1">Calendar</span>
         </Link>
@@ -32,12 +32,12 @@ const Navigation: React.FC = () => {
           <span className="text-xs mt-1 invisible">Create</span>
         </Link>
         
-        <Link href="/tasks" className={`flex flex-col items-center p-2 ${isActive('/tasks') ? 'text-amber-500' : 'text-gray-500'}`}>
+        <Link href="/tasks" className={`flex flex-col items-center p-2 ${isActive('/tasks') ? 'text-amber-500' : 'text-gray-500 dark:text-gray-400'}`}>
           <FileText size={24} />
           <span className="text-xs mt-1">Tasks</span>
         </Link>
         
-        <Link href="/directory" className={`flex flex-col items-center p-2 ${isActive('/directory') ? 'text-amber-500' : 'text-gray-500'}`}>
+        <Link href="/directory" className={`flex flex-col items-center p-2 ${isActive('/directory') ? 'text-amber-500' : 'text-gray-500 dark:text-gray-400'}`}>
           <Users size={24} />
           <span className="text-xs mt-1">Family</span>
         </Link>
