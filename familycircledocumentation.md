@@ -5,7 +5,7 @@
 **Project Name:** Family Circle
 
 **Description:**  
-Family Circle is a web application designed to help families—both immediate and extended—connect and stay updated on each other's lives. It serves as a central hub for sharing family news, events, photos, and messages. The app is optimized for mobile web devices, ensuring a seamless experience on smartphones.
+Family Circle is a React Native app designed to help families—both immediate and extended—connect and stay updated on each other's lives. It serves as a central hub for sharing family news, events, photos, and messages. The app is optimized for mobile web devices, ensuring a seamless experience on smartphones.
 
 **Goals & Target Audience:**  
 - **Goal:** Connect families through a centralized platform where they can share updates, communicate, and manage family events and tasks.  
@@ -152,7 +152,7 @@ While no AI integration is planned at launch, here are a few suggestions for fut
 ## 6. UI/UX Design
 
 **User Interface:**  
-- The design follows a mobile-first approach, optimized for web browsers on mobile devices.
+- The design follows a mobile-first approach, optimized for mobile devices.
 - **Key Elements:**  
   - Clean and intuitive dashboards for users and admins.  
   - Easy navigation through the family feed, calendar, messaging, and media sections.
