@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { login } from '@/services/authService';
 
 interface LoginFormProps {
@@ -28,7 +29,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
       if (onSuccess) {
         onSuccess();
       } else {
-        router.push('/dashboard');
+        router.push('/');
       }
     } catch (err: any) {
       setIsLoading(false);
@@ -67,9 +68,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
             <label htmlFor="password" className="block text-sm font-medium text-gray-300">
               Password
             </label>
-            <a href="/forgot-password" className="text-xs text-blue-400 hover:text-blue-300">
+            <Link href="/forgot-password" className="text-xs text-blue-400 hover:text-blue-300">
               Forgot password?
-            </a>
+            </Link>
           </div>
           <input
             id="password"
@@ -92,9 +93,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
         <div className="text-center">
           <p className="text-xs text-gray-400">
             Don't have an account?{' '}
-            <a href="/register" className="text-amber-500 hover:text-amber-400 font-medium">
+            <Link href="/register" className="text-amber-500 hover:text-amber-400 font-medium">
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
       </form>

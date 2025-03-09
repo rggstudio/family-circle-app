@@ -18,12 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} dark:bg-gray-900 dark:text-white transition-colors`}>
-        <AuthProvider>
-          <ThemeProvider>
+      <body className={inter.className} suppressHydrationWarning>
+        <ThemeProvider>
+          <AuthProvider>
             {children}
-          </ThemeProvider>
-        </AuthProvider>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

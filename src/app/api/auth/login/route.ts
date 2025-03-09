@@ -1,81 +1,75 @@
 import { NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-
-// In a real app, you would use a database
-// This is a simple in-memory store for demonstration
-// We're importing the same users array from the register route
-// In a real app, this would be a database query
-import { users, families } from '../register/route';
-
-interface User {
-  id: string;
-  email: string;
-  password: string;
-  familyId?: string;
-  [key: string]: any;
-}
-
-interface Family {
-  id: string;
-  [key: string]: any;
-}
+import { adminAuth, adminDb } from '@/lib/firebase-admin';
 
 export async function POST(request: Request) {
   try {
-    const { email, password } = await request.json();
+    // Check if Firebase Admin is initialized
+    if (!adminAuth || !adminDb) {
+      console.error('Firebase Admin not initialized properly');
+      return NextResponse.json(
+        { message: 'Server configuration error. Please check server logs.' },
+        { status: 500 }
+      );
+    }
 
-    // Validate required fields
+    const { email, password } = await request.json();
+    
     if (!email || !password) {
       return NextResponse.json(
         { message: 'Email and password are required' },
         { status: 400 }
       );
     }
-
-    // Find user by email
-    const user = users.find((user: User) => user.email === email);
-    if (!user) {
+    
+    // Verify the user credentials
+    const userRecord = await adminAuth.getUserByEmail(email);
+    
+    // Get the user from Firestore
+    const userDoc = await adminDb.collection('users').doc(userRecord.uid).get();
+    
+    if (!userDoc.exists) {
       return NextResponse.json(
-        { message: 'Invalid credentials' },
-        { status: 401 }
+        { message: 'User not found' },
+        { status: 404 }
       );
     }
-
-    // Verify password
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return NextResponse.json(
-        { message: 'Invalid credentials' },
-        { status: 401 }
-      );
+    
+    const userData = userDoc.data();
+    
+    // Create a custom token for the client
+    const token = await adminAuth.createCustomToken(userRecord.uid);
+    
+    // Get family data if user has a family
+    let family = undefined;
+    if (userData?.familyId) {
+      const familyDoc = await adminDb.collection('families').doc(userData.familyId).get();
+      if (familyDoc.exists) {
+        family = {
+          id: familyDoc.id,
+          ...familyDoc.data()
+        };
+      }
     }
-
-    // Find user's family
-    const family = user.familyId 
-      ? families.find((f: Family) => f.id === user.familyId) 
-      : undefined;
-
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: user.id },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: '7d' }
-    );
-
-    // Return user data (without password) and token
-    const { password: _, ...userResponse } = user;
-
+    
+    // Format the user data
+    const user = {
+      id: userDoc.id,
+      ...userData,
+      createdAt: userData?.createdAt?.toDate(),
+      updatedAt: userData?.updatedAt?.toDate(),
+    };
+    
     return NextResponse.json({
-      user: userResponse,
+      user,
       token,
       family
     });
   } catch (error: any) {
     console.error('Login error:', error);
+    
     return NextResponse.json(
-      { message: error.message || 'Server error' },
-      { status: 500 }
+      { message: error.message || 'Login failed' },
+      { status: 401 }
     );
   }
 } 

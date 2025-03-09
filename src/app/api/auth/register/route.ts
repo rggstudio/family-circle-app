@@ -1,18 +1,20 @@
 import { NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import { v4 as uuidv4 } from 'uuid';
-
-// In a real app, you would use a database
-// This is a simple in-memory store for demonstration
-export const users: any[] = [];
-export const families: any[] = [];
+import { adminAuth, adminDb } from '@/lib/firebase-admin';
+import { generateInviteCode } from '@/utils/helpers';
 
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
-    const { name, email, password, familyName, familyCode, profileImage } = data;
+    // Check if Firebase Admin is initialized
+    if (!adminAuth || !adminDb) {
+      console.error('Firebase Admin not initialized properly');
+      return NextResponse.json(
+        { message: 'Server configuration error. Please check server logs.' },
+        { status: 500 }
+      );
+    }
 
+    const { name, email, password, familyName, familyCode, profileImage } = await request.json();
+    
     // Validate required fields
     if (!name || !email || !password) {
       return NextResponse.json(
@@ -20,92 +22,110 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-
-    // Check if user already exists
-    const existingUser = users.find(user => user.email === email);
-    if (existingUser) {
-      return NextResponse.json(
-        { message: 'User with this email already exists' },
-        { status: 400 }
-      );
-    }
-
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    // Create user
-    const userId = uuidv4();
-    const now = new Date();
     
-    let familyId: string | undefined;
-    let family: any | undefined;
-
-    // Handle family creation or joining
-    if (familyCode) {
-      // Join existing family
-      family = families.find(f => f.inviteCode === familyCode);
-      
-      if (!family) {
+    // Check if user already exists
+    try {
+      const existingUser = await adminAuth.getUserByEmail(email);
+      if (existingUser) {
         return NextResponse.json(
-          { message: 'Invalid family invite code' },
+          { message: 'Email already in use' },
+          { status: 400 }
+        );
+      }
+    } catch (error: any) {
+      // If error.code is auth/user-not-found, that's what we want
+      if (error.code !== 'auth/user-not-found') {
+        throw error;
+      }
+    }
+    
+    // Create user in Firebase Auth
+    const userRecord = await adminAuth.createUser({
+      email,
+      password,
+      displayName: name,
+    });
+    
+    // Handle family creation or joining
+    let familyId;
+    let family;
+    
+    if (familyName) {
+      // Create a new family
+      const inviteCode = generateInviteCode();
+      
+      const newFamilyRef = adminDb.collection('families').doc();
+      await newFamilyRef.set({
+        name: familyName,
+        inviteCode,
+        createdBy: userRecord.uid,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+      
+      familyId = newFamilyRef.id;
+      
+      // Get the created family
+      const familyDoc = await newFamilyRef.get();
+      family = {
+        id: familyDoc.id,
+        ...familyDoc.data(),
+      };
+    } else if (familyCode) {
+      // Join an existing family
+      const familiesRef = adminDb.collection('families');
+      const familyQuery = await familiesRef.where('inviteCode', '==', familyCode).get();
+      
+      if (familyQuery.empty) {
+        return NextResponse.json(
+          { message: 'Invalid family code' },
           { status: 400 }
         );
       }
       
-      familyId = family.id;
-    } else if (familyName) {
-      // Create new family
-      familyId = uuidv4();
-      const inviteCode = Math.random().toString(36).substring(2, 10).toUpperCase();
-      
+      const familyDoc = familyQuery.docs[0];
+      familyId = familyDoc.id;
       family = {
-        id: familyId,
-        name: familyName,
-        inviteCode,
-        createdBy: userId,
-        createdAt: now,
-        updatedAt: now
+        id: familyDoc.id,
+        ...familyDoc.data(),
       };
-      
-      families.push(family);
     }
-
-    // Create user object
-    const user = {
-      id: userId,
+    
+    // Create user in Firestore
+    const userRef = adminDb.collection('users').doc(userRecord.uid);
+    await userRef.set({
       name,
       email,
-      password: hashedPassword,
-      profileImage,
-      familyId,
-      isAdmin: familyId ? family?.createdBy === userId : false,
-      createdAt: now,
-      updatedAt: now
+      profileImage: profileImage || null,
+      familyId: familyId || null,
+      isAdmin: familyName ? true : false, // Admin if creating a new family
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+    
+    // Get the created user
+    const userDoc = await userRef.get();
+    const userData = userDoc.data();
+    
+    // Create a custom token for the client
+    const token = await adminAuth.createCustomToken(userRecord.uid);
+    
+    // Format the user data
+    const user = {
+      id: userDoc.id,
+      ...userData,
     };
-
-    // Save user
-    users.push(user);
-
-    // Generate JWT token
-    const token = jwt.sign(
-      { id: user.id },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: '7d' }
-    );
-
-    // Return user data (without password) and token
-    const { password: _, ...userResponse } = user;
-
+    
     return NextResponse.json({
-      user: userResponse,
+      user,
       token,
       family
     });
   } catch (error: any) {
     console.error('Registration error:', error);
+    
     return NextResponse.json(
-      { message: error.message || 'Server error' },
+      { message: error.message || 'Registration failed' },
       { status: 500 }
     );
   }

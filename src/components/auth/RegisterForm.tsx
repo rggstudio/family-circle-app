@@ -102,7 +102,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
       if (onSuccess) {
         onSuccess();
       } else {
-        router.push('/dashboard');
+        router.push('/');
       }
     } catch (err: any) {
       setIsLoading(false);
