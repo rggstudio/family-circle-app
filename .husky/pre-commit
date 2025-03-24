@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
 echo "Committing changes..."
 
 npx lint-staged
+=======
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Committing changes..."
+
+npm test
+>>>>>>> 5b431fa (Update SignUpScreen with image picker)

@@ -1,6 +1,7 @@
 {
   "expo": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "name": "Family Circle",
     "slug": "family-circle",
 =======
@@ -12,6 +13,10 @@
     "slug": "family-circle-app",
 >>>>>>> 8bfd731 (Initial commit)
 >>>>>>> 4b3f4ae (Initial commit)
+=======
+    "name": "Family Circle",
+    "slug": "family-circle",
+>>>>>>> 5b431fa (Update SignUpScreen with image picker)
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
