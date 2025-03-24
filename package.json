@@ -22,11 +22,16 @@
     "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "prepare": "husky",
     "postinstall": "husky install"
 =======
     "prepare": "husky"
 >>>>>>> 5b431fa (Update SignUpScreen with image picker)
+=======
+    "prepare": "husky",
+    "postinstall": "husky install"
+>>>>>>> 9fcad5d (Update ESLint and Husky configuration)
   },
   "jest": {
     "preset": "jest-expo"
@@ -120,6 +125,7 @@
     "@typescript-eslint/eslint-plugin": "^8.27.0",
     "@typescript-eslint/parser": "^8.27.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-ft-flow": "^3.0.11",
@@ -128,6 +134,9 @@
     "eslint-plugin-react-hooks": "^5.2.0",
 =======
     "eslint": "^9.23.0",
+=======
+    "eslint": "^8.57.0",
+>>>>>>> 9fcad5d (Update ESLint and Husky configuration)
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-react": "^7.37.4",
 >>>>>>> 5b431fa (Update SignUpScreen with image picker)
@@ -135,7 +144,11 @@
     "husky": "^9.1.7",
     "jest": "^29.2.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "jest-expo": "~52.0.4",
+=======
+    "jest-expo": "~52.0.6",
+>>>>>>> 9fcad5d (Update ESLint and Husky configuration)
     "lint-staged": "^15.5.0",
     "prettier": "^3.5.3",
 =======
