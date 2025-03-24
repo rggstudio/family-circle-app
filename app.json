@@ -1,7 +1,17 @@
 {
   "expo": {
+<<<<<<< HEAD
     "name": "Family Circle",
     "slug": "family-circle",
+=======
+<<<<<<< HEAD
+    "name": "codeguide-expo-firebase",
+    "slug": "codeguide-expo-firebase",
+=======
+    "name": "family-circle-app",
+    "slug": "family-circle-app",
+>>>>>>> 8bfd731 (Initial commit)
+>>>>>>> 4b3f4ae (Initial commit)
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

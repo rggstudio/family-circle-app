@@ -1,8 +1,6 @@
-[![CodeGuide](/codeguide-backdrop.svg)](https://codeguide.dev)
+# Family Circle App
 
-# CodeGuide Expo Firebase Starter
-
-A modern cross-platform mobile application starter template built with Expo and Firebase, featuring authentication and real-time database integration.
+A modern cross-platform mobile application for connecting families, built with Expo and Firebase.
 
 ## Tech Stack
 
@@ -21,11 +19,11 @@ Before you begin, ensure you have the following:
 - Node.js 18+ installed
 - [Expo CLI](https://docs.expo.dev/get-started/installation/) installed globally
 - A [Firebase](https://firebase.google.com/) project for authentication and backend services
-- Generated project documents from [CodeGuide](https://codeguide.dev/) for best development experience
 - (Optional) [Expo Go](https://expo.dev/client) app installed on your mobile device
 
 ## Getting Started
 
+<<<<<<< HEAD
 1. **Clone the repository**
 
    ```bash
@@ -34,12 +32,15 @@ Before you begin, ensure you have the following:
    ```
 
 2. **Install dependencies**
+=======
+1. **Install dependencies**
+>>>>>>> 4b3f4ae (Initial commit)
 
    ```bash
    npm install
    ```
 
-3. **Environment Variables Setup**
+2. **Environment Variables Setup**
 
    - Copy the `.env.example` file to `.env`:
      ```bash
@@ -47,13 +48,13 @@ Before you begin, ensure you have the following:
      ```
    - Fill in the environment variables in `.env` (see Configuration section below)
 
-4. **Start the development server**
+3. **Start the development server**
 
    ```bash
    npx expo start
    ```
 
-5. **Run the app:**
+4. **Run the app:**
    - Scan the QR code with Expo Go (Android)
    - Scan the QR code with Camera app (iOS)
    - Press 'i' for iOS simulator
@@ -83,6 +84,17 @@ FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
 FIREBASE_APP_ID=your_firebase_app_id
 ```
 
+## Project Structure
+
+```
+family-circle-app/
+├── app/                # Expo Router pages
+├── components/         # React Native components
+├── constants/         # Constants and configurations
+├── hooks/             # Custom hooks
+└── assets/            # Static assets
+```
+
 ## Features
 
 - 🔐 Firebase Authentication
@@ -94,6 +106,7 @@ FIREBASE_APP_ID=your_firebase_app_id
 - 📱 Responsive Design
 - 💫 Smooth animations with Reanimated
 
+<<<<<<< HEAD
 ## Project Structure
 
 ```
@@ -124,6 +137,8 @@ These documentation files serve as a reference for your project's features and i
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
+=======
+>>>>>>> 4b3f4ae (Initial commit)
 ## Learn More
 
 To learn more about the technologies used in this project:
@@ -132,3 +147,10 @@ To learn more about the technologies used in this project:
 - [Firebase Documentation](https://firebase.google.com/docs)
 - [React Native Documentation](https://reactnative.dev/docs/getting-started)
 - [Expo Router Documentation](https://docs.expo.dev/router/introduction/)
+
+## Join the community
+
+Join our community of developers creating universal apps:
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
