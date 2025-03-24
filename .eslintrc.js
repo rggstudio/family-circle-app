@@ -1,25 +1,21 @@
 module.exports = {
   root: true,
-  extends: [
-    '@react-native',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-  ],
+  extends: ['@react-native', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  rules: {
-    'react-native/no-inline-styles': 'warn',
-    '@typescript-eslint/no-unused-vars': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'react/react-in-jsx-scope': 'off',
-  },
+  plugins: ['@typescript-eslint', 'react', 'react-native'],
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
       rules: {
-        '@typescript-eslint/explicit-function-return-type': ['warn'],
+        '@typescript-eslint/no-shadow': ['error'],
+        'no-shadow': 'off',
+        'no-undef': 'off',
       },
     },
   ],
-}; 
+  rules: {
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'react-native/no-inline-styles': 'warn',
+  },
+};
