@@ -1,0 +1,113 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+## Project Overview
+
+*   **Type:** Mobile Application (Expo & React Native)
+*   **Description:** The "Family Circle" app aims to connect families through posts, events, lists, and chats via a mobile-first approach on both iOS and Android.
+*   **Primary Goal:** Facilitate seamless family interactions and activities through secure authentication, real-time messaging, event coordination, media sharing, and integrated user management.
+
+## Project Structure
+
+### Framework-Specific Routing
+
+*   **Directory Rules:**
+
+    *   **expo-react-native (Assumed Latest Version):** Utilize React Navigation with nested stack navigators. Routing logic should be centralized in the `src/navigation/` directory.
+    *   Example: "React Navigation 6" → `src/navigation/AppNavigator.tsx` for setting up the root navigation and routes.
+
+### Core Directories
+
+*   **Versioned Structure:**
+
+    *   **src/screens:** Contains screen components for various app views (e.g., Home, Auth, Profile).
+    *   **src/components:** Reusable UI components and widgets.
+    *   **src/navigation:** Houses navigation configuration and route definitions using React Navigation.
+    *   **src/services:** Integration logic for external services (Firebase, Auth Clerk, Cloudinary, etc.).
+
+### Key Files
+
+*   **Stack-Versioned Patterns:**
+
+    *   `src/navigation/AppNavigator.tsx`: Root navigator setup using React Navigation for route management.
+    *   `src/screens/Auth/LoginScreen.tsx`: Authentication screen integrating Auth Clerk and Firebase authentication flows.
+    *   `src/screens/HomeScreen.tsx`: Main screen for family feed, events, and messaging.
+
+## Tech Stack Rules
+
+*   **Version Enforcement:**
+
+    *   `expo@latest`: Use Expo managed workflow to streamline mobile development with React Native.
+    *   `react-native@latest`: Follow functional component patterns with hooks for state and effect management.
+    *   `firebase@9+`: Leverage the modular SDK for optimized performance and maintainability.
+    *   `node@latest`: Ensure RESTful API practices and secure Node.js backend integration with Cloud-hosted services.
+
+## PRD Compliance
+
+*   **Non-Negotiable:**
+
+    *   "End-to-end encryption for messages must be strictly maintained." → Enforce robust encryption standards in messaging components and backend communications.
+    *   "Push notifications must integrate with Firebase Cloud Messaging (FCM) for real-time alerts." → All notification flows should comply with this requirement.
+
+## App Flow Integration
+
+*   **Stack-Aligned Flow:**
+
+    *   Example: "React Native Auth Flow" → `src/screens/Auth/LoginScreen.tsx` integrates Auth Clerk for sign-up/login and Firebase for managing real-time data and messaging.
+    *   Example: "Family Feed Flow" → `src/screens/HomeScreen.tsx` is structured to present posts, events, and chats seamlessly using React Navigation.
+
+## Best Practices
+
+*   **React Native**
+
+    *   Use functional components with hooks over class components.
+    *   Keep components modular, reusable, and maintain a clean separation of concerns.
+    *   Follow platform-specific design guidelines for both iOS and Android.
+
+*   **Expo**
+
+    *   Utilize the managed workflow to expedite development and testing.
+    *   Optimize asset usage through Expo’s asset management system.
+    *   Leverage Expo’s API for device-specific functionalities (e.g., camera, notifications).
+
+*   **Firebase**
+
+    *   Adopt modular SDK imports for enhanced performance.
+    *   Implement secure practices for API keys and configuration management.
+    *   Use Firebase’s offline persistence features where applicable.
+
+*   **Node.js Backend**
+
+    *   Follow RESTful API conventions with clear endpoint structuring.
+    *   Use middleware for error handling and security (authentication, rate limiting).
+    *   Maintain consistent logging and monitoring for backend health.
+
+*   **Auth Clerk**
+
+    *   Enforce secure authentication flows using both OAuth and traditional email/password methods.
+    *   Safeguard authentication tokens and ensure secure session handling.
+
+*   **Cloudinary**
+
+    *   Optimize media uploads by validating file sizes prior to processing.
+    *   Ensure media optimization settings are correctly applied for photos (max 5MB) and videos (max 50MB).
+
+*   **Stripe**
+
+    *   Follow secure payment processing guidelines to maintain PCI compliance.
+    *   Ensure that all payment flows use secure, encrypted channels.
+
+*   **Firebase Cloud Messaging (FCM)**
+
+    *   Securely manage push notification tokens.
+    *   Ensure timely and reliable handling of notification delivery.
+
+## Rules
+
+*   Derive folder/file patterns **directly** from the tech stack version requirements provided in the starter kit documentation.
+*   For projects using Next.js 14 App Router (not applicable here): Enforce the `app/` directory with nested route folders.
+*   For projects using Pages Router (not applicable here): Use the `pages/*.tsx` flat structure.
+*   Mirror the folder and routing logic for other frameworks (e.g., React Navigation for React Native) by maintaining consistent separation between navigational, screen, and component directories.
+*   Never mix version patterns; maintain strict adherence to version-specific conventions throughout the project.
