@@ -2,6 +2,7 @@ module.exports = {
   root: true,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   extends: ['@react-native', 'plugin:@typescript-eslint/recommended', 'plugin:jest/recommended'],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react', 'react-native', 'jest'],
@@ -26,6 +27,11 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react', 'react-native'],
 >>>>>>> 9fcad5d (Update ESLint and Husky configuration)
+=======
+  extends: ['@react-native', 'plugin:@typescript-eslint/recommended', 'plugin:jest/recommended'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'react', 'react-native', 'jest'],
+>>>>>>> dd89df4 (Enhance ESLint configuration by adding Jest support and new plugins for improved testing and linting capabilities)
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -61,6 +67,12 @@ module.exports = {
         '@typescript-eslint/no-shadow': ['error'],
         'no-shadow': 'off',
         'no-undef': 'off',
+      },
+    },
+    {
+      files: ['*.test.ts', '*.test.tsx'],
+      env: {
+        jest: true,
       },
     },
   ],
